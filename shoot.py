@@ -2,6 +2,7 @@ import json
 import datetime
 import time
 import requests
+import random
 from xml.dom.minidom import parseString
 request_settings = {
     "use_https": True,
@@ -323,9 +324,9 @@ for i, t in enumerate(time_list):
     print("[" + str(i) + "]" + t)
 d_list = get_danmaku(bvid=bvid, page=page, date=datetime.date(*map(int,time_list[int(input("输入目标时间之前的序号："))].split('-'))), verify=verify)
 print("一共找到" + str(len(d_list)) + "条弹幕，开始发送...")
-print("预计发送时间：" + str(15 * len(d_list)) + "秒")
+print("预计发送时间：" + str(20 * len(d_list)) + "秒")
 for danmaku in d_list:
     result = send_danmaku(bvid=target, page=target_page, danmaku=danmaku, verify=verify)
     print("发送成功：", danmaku.dm_time, danmaku.color, danmaku.text)
     print("休眠15秒...")
-    time.sleep(15)
+    time.sleep(20 + random.random())
